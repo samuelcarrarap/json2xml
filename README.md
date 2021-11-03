@@ -16,7 +16,7 @@ $json2xml = new Json2XML(false);
 
 $xml = $json2xml->convert($json, 'root');
 ````
-**RESULT**
+**RESULT WITHOUT ROOT EXTRACTION**
 ````xml
 <root><books><title>The Chronicles of Narnia</title></books></root>
 ```` 
