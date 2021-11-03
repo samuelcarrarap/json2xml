@@ -47,13 +47,13 @@
                 if(is_array($x)){
                     foreach($x as $x2){
                         if(is_object($x2)){
-                            $xml .= "<".$this->normalize_tag($key).">";
+                            if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                             $xml .= $this->proccess($x2, $key);
-                            $xml .= "</".$this->normalize_tag($key).">";
+                            if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
                         } else {
-                            $xml .= "<".$this->normalize_tag($key).">";
+                            if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                             $xml .= $this->normalize_content($x2);
-                            $xml .= "</".$this->normalize_tag($key).">";
+                            if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
                         }
                     }
                     unset($object->$key);
@@ -63,19 +63,19 @@
                     $xml2 = "";
                     foreach($x as $key2 => $x2){
                         if(!is_object($x2)){
-                            $xml2 .= "<".$this->normalize_tag($key2).">";
+                            if(is_numeric($key2) == false) $xml2 .= "<".$this->normalize_tag($key2).">";
                             $xml2 .= $this->normalize_content($x2);
-                            $xml2 .= "</".$this->normalize_tag($key2).">";
+                            if(is_numeric($key2) == false) $xml2 .= "</".$this->normalize_tag($key2).">";
                         }
                     }
                     if(!empty($xml2)){
-                        $xml .= "<".$this->normalize_tag($key).">";
+                        if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                         $xml .= $xml2;
-                        $xml .= "</".$this->normalize_tag($key).">";
+                        if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
                     } else {
-                        $xml .= "<".$this->normalize_tag($key).">";
+                        if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                         $xml .= $this->proccess($x, $key);
-                        $xml .= "</".$this->normalize_tag($key).">";
+                        if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
                     }
                     unset($object->$key);
                     continue;
@@ -85,20 +85,19 @@
         }
 
         public function convert($json, $main = ""){
-            if(empty($main)) $main = "root";
             $object = @json_decode($json);
             if(!$object) return false;
-            $extracted = false;
             if($this->extract_root){
                 $vars = array_keys(get_object_vars($object));
                 if(count($vars) == 1){
                     $key = $vars[0];
                     if(is_string($key) && empty($key) == false){
                         $main = $key;
-                        if(is_object($object->$key)) $object = $object->$key;
+                        if(is_object($object->$key) || is_array($object->$key)) $object = $object->$key;
                     }
                 }
             }
+            if(empty($main)) $main = "root";
             $xml = "";
             $xml .= "<".$this->normalize_tag($main).">";
             $xml .= $this->proccess($object);
