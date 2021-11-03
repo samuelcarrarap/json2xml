@@ -23,6 +23,10 @@ echo $xml;
 
 **USAGE WITH CUSTOM ROOT TAG**
 ````php
+require_once('Json2XML.class.php');
+
+$json = '{ "books": [{ "title": "The Chronicles of Narnia" }] }';
+
 $json2xml = new Json2XML(false);
 
 $xml = $json2xml->convert($json, 'main');
@@ -40,6 +44,10 @@ echo $xml;
 
 **USAGE WITH ROOT EXTRACTION**
 ````php
+require_once('Json2XML.class.php');
+
+$json = '{ "books": [{ "title": "The Chronicles of Narnia" }] }';
+
 $json2xml = new Json2XML(true);
 
 $xml = $json2xml->convert($json);
