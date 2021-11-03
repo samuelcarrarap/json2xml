@@ -9,7 +9,7 @@ $json = '{ "books": [{ "title": "The Chronicles of Narnia" }] }';
 
 $json2xml = new Json2XML();
 
-$xml = $json2xml->convert($json, 'root');
+$xml = $json2xml->convert($json);
 
 echo $xml;
 ````
