@@ -94,14 +94,15 @@
                 if(count($vars) == 1){
                     $key = $vars[0];
                     if(is_string($key) && empty($key) == false){
-                        $extracted = true;
+                        $main = $key;
+                        if(is_object($object->$key)) $object = $object->$key;
                     }
                 }
             }
             $xml = "";
-            if($extracted == false) $xml .= "<".$this->normalize_tag($main).">";
+            $xml .= "<".$this->normalize_tag($main).">";
             $xml .= $this->proccess($object);
-            if($extracted == false) $xml .= "</".$this->normalize_tag($main).">";
+            $xml .= "</".$this->normalize_tag($main).">";
             return $xml;
         }
     }
