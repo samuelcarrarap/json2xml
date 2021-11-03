@@ -4,6 +4,12 @@
         * 03.11.2021
     */
     class Json2XML {
+        private $extract_root;
+
+        public function __construct($extract_root = false){
+            $this->extract_root = $extract_root;
+        }
+
         private function normalize_tag($string){
             $replace = array("Š"=>"S", "š"=>"s", "Ž"=>"Z", "ž"=>"z", "À"=>"A", "Á"=>"A", "Â"=>"A", "Ã"=>"A", "Ä"=>"A", "Å"=>"A", "Æ"=>"A", "Ç"=>"C", "È"=>"E", "É"=>"E",
                                 "Ê"=>"E", "Ë"=>"E", "Ì"=>"I", "Í"=>"I", "Î"=>"I", "Ï"=>"I", "Ñ"=>"N", "Ò"=>"O", "Ó"=>"O", "Ô"=>"O", "Õ"=>"O", "Ö"=>"O", "Ø"=>"O", "Ù"=>"U",
@@ -78,14 +84,24 @@
             return $xml;
         }
 
-        public function convert($json, $main = "root"){
+        public function convert($json, $main = ""){
+            if(empty($main)) $main = "root";
             $object = @json_decode($json);
             if(!$object) return false;
+            $extracted = false;
+            if($this->extract_root){
+                $vars = array_keys(get_object_vars($object));
+                if(count($vars) == 1){
+                    $key = $vars[0];
+                    if(is_string($key) && empty($key) == false){
+                        $extracted = true;
+                    }
+                }
+            }
             $xml = "";
-            $xml .= "<".$this->normalize_tag($main).">";
+            if($extracted == false) $xml .= "<".$this->normalize_tag($main).">";
             $xml .= $this->proccess($object);
-            $xml .= "</".$this->normalize_tag($main).">";
+            if($extracted == false) $xml .= "</".$this->normalize_tag($main).">";
             return $xml;
         }
     }
-?>
