@@ -11,8 +11,4 @@ $json2xml = new Json2XML();
 $xml = $json2xml->convert($json, 'main');
 
 **RESULT**
-<main>
-	<books>
-		<title>The Chronicles of Narnia</title>
-	</books>
-</main>
+<main><books><title>The Chronicles of Narnia</title></books></main>
