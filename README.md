@@ -21,19 +21,19 @@ echo $xml;
 
 -------------------------------------------------------------------
 
-**USAGE WITHOUT ROOT EXTRACTION**
+**USAGE WITH CUSTOM ROOT TAG**
 ````php
 $json2xml = new Json2XML(false);
 
-$xml = $json2xml->convert($json, 'root');
+$xml = $json2xml->convert($json, 'main');
 
 echo $xml;
 ````
 
 
-**RESULT WITHOUT ROOT EXTRACTION**
+**RESULT WITH CUSTOM ROOT TAG**
 ````xml
-<root><books><title>The Chronicles of Narnia</title></books></root>
+<main><books><title>The Chronicles of Narnia</title></books></main>
 ```` 
 
 -------------------------------------------------------------------
