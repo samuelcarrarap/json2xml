@@ -14,9 +14,5 @@ $xml = $json2xml->convert($json, 'main');
 
 **RESULT**
 ````xml
-<main>
-	<books>
-		<title>The Chronicles of Narnia</title>
-	</books>
-</main>
+<main><books><title>The Chronicles of Narnia</title></books></main>
 ```` 
