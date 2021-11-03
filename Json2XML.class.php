@@ -38,9 +38,9 @@
                     continue;
                 }
                 if(is_string($x)){
-                    $xml .= "<".$this->normalize_tag($key).">";
+                    if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                     $xml .= $this->normalize_content($x);
-                    $xml .= "</".$this->normalize_tag($key).">";
+                    if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
                     unset($object->$key);
                     continue;
                 }
