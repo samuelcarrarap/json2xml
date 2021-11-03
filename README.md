@@ -8,6 +8,10 @@ require_once('Json2XML.class.php');
 $json = '{ "books": [{ "title": "The Chronicles of Narnia" }] }';
 
 $json2xml = new Json2XML();
+
+$xml = $json2xml->convert($json, 'root');
+
+echo $xml;
 ````
 
 **USAGE WITHOUT ROOT EXTRACTION**
@@ -15,6 +19,8 @@ $json2xml = new Json2XML();
 $json2xml = new Json2XML(false);
 
 $xml = $json2xml->convert($json, 'root');
+
+echo $xml;
 ````
 
 -------------------------------------------------------------------
@@ -29,6 +35,8 @@ $xml = $json2xml->convert($json, 'root');
 $json2xml = new Json2XML(true);
 
 $xml = $json2xml->convert($json);
+
+echo $xml;
 ````
 
 **RESULT WITH ROOT EXTRACTION**
