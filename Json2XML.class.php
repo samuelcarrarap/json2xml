@@ -22,7 +22,7 @@
             return htmlspecialchars($string, ENT_XML1 | ENT_COMPAT, 'UTF-8');
         }
 
-        private function proccess($object, $parent = ""){
+        private function proccess($object, $parent = "root"){
             $xml = "";
             foreach($object as $key => $x){
                 if(is_null($x) || empty($x)){
