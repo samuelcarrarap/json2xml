@@ -18,7 +18,7 @@ echo $xml;
 ````xml
 <root><books><title>The Chronicles of Narnia</title></books></root>
 ````
- 
+
 -------------------------------------------------------------------
 
 **USAGE WITHOUT ROOT EXTRACTION**
@@ -30,12 +30,13 @@ $xml = $json2xml->convert($json, 'root');
 echo $xml;
 ````
 
--------------------------------------------------------------------
 
 **RESULT WITHOUT ROOT EXTRACTION**
 ````xml
 <root><books><title>The Chronicles of Narnia</title></books></root>
 ```` 
+
+-------------------------------------------------------------------
 
 **USAGE WITH ROOT EXTRACTION**
 ````php
