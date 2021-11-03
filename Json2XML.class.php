@@ -31,11 +31,17 @@
         private function proccess($object, $parent = ""){
             $xml = "";
             foreach($object as $key => $x){
-                if(is_null($x) || empty($x)){
+                if((is_null($x) || empty($x)) && $x !== 0){
                     if(is_numeric($key)) $xml .= "<".$this->normalize_tag($parent)." />";
                     else $xml .= "<".$this->normalize_tag($key)." />";
                     unset($object->$key);
                     continue;
+                }
+                if(is_bool($x)){
+                    if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
+                    $xml .= $x ? "1" : "0";
+                    if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
+                    unset($object->$key);
                 }
                 if(is_string($x)){
                     if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
