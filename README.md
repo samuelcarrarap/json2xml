@@ -13,6 +13,12 @@ $xml = $json2xml->convert($json, 'root');
 
 echo $xml;
 ````
+-------------------------------------------------------------------
+
+**RESULT**
+````xml
+<root><books><title>The Chronicles of Narnia</title></books></root>
+```` 
 
 **USAGE WITHOUT ROOT EXTRACTION**
 ````php
