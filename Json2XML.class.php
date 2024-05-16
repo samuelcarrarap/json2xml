@@ -37,6 +37,13 @@
                     unset($object->$key);
                     continue;
                 }
+                if(is_numeric($x)){
+                    if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
+                    $xml .= (string)$x;
+                    if(is_numeric($key) == false) $xml .= "</".$this->normalize_tag($key).">";
+                    unset($object->$key);
+                    continue;
+                }
                 if(is_bool($x)){
                     if(is_numeric($key) == false) $xml .= "<".$this->normalize_tag($key).">";
                     $xml .= $x ? "1" : "0";
